@@ -23,6 +23,15 @@ services:
     stdin_open: true
     volumes:
       - .:/myapp
+  nginx:
+    build: containers/nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./public:/app/public
+      - ./tmp:/app/tmp
+    depends_on:
+      - web
 volumes:
   mysql-data:
     driver: local
