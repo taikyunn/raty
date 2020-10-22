@@ -1,0 +1,10 @@
+<%= form_with model: @star, url: star_index_path, method: :post, local: true do |f|%>
+
+  <div class="form-group row" id="star">
+    <%= f.label :rate,'評価 ', class:'col-md-3 col-form-label' %>
+    <%= f.hidden_field :rating, id: :star_rating %>
+  </div>
+
+  <%= render "star" %>
+  <%= f.submit %>
+<% end %>
