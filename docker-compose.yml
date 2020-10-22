@@ -24,7 +24,7 @@ services:
     volumes:
       - .:/myapp
   nginx:
-    build: containers/nginx
+    build: container/nginx
     ports:
       - "80:80"
     volumes:
