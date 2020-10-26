@@ -9,6 +9,9 @@ RUN apt-get update && apt-get install -y postgresql-client --no-install-recommen
 RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
 
 WORKDIR /myapp
+ENV RAILS_ENV="production"
+ENV NODE_ENV="production"
+
 ADD Gemfile /myapp/Gemfile
 ADD Gemfile.lock /myapp/Gemfile.lock
 RUN gem install bundler
@@ -16,6 +19,12 @@ RUN bundle install
 COPY . /myapp
 ADD . /myapp
 
+RUN SECRET_KEY_BASE=placeholder bundle exec rails assets:precompile \
+ && yarn cache clean \
+ && rm -rf node_modules tmp/cache
+
+
+ENV RAILS_SERVE_STATIC_FILES="true"
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
