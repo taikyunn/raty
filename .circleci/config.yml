@@ -43,7 +43,7 @@ jobs:
       - run:
           name: Database setup
           command: bundle exec rails db:schema:load --trace
-          gem install bundler -v 2.1.4
+                   gem install bundler -v 2.1.4
       # Run rspec in parallel
       - ruby/rspec-test
       - ruby/rubocop-check
