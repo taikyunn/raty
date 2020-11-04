@@ -20,8 +20,11 @@ jobs:
       - run:
         name: Bundler install
         command: |
-          gem update --system
-          gem install bundler -v 2.1.4
+          sudo gem update --system
+          sudo gem uninstall bundler
+          sudo rm /usr/local/bin/bundle
+          sudo rm /usr/local/bin/bundler
+          sudo gem install bundler
   test:
     parallelism: 3
     docker:
