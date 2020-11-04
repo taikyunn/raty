@@ -8,6 +8,8 @@ jobs:
   build:
     docker:
       - image: cimg/ruby:2.6.5-node
+        environment:
+          BUNDLER_VERSION: 2.1.4
     steps:
       - checkout
       - ruby/install-deps
@@ -15,6 +17,11 @@ jobs:
       - node/install-packages:
           pkg-manager: yarn
           cache-key: "yarn.lock"
+      - run:
+        name: Bundler install
+        command: |
+          gem update --system
+          gem install bundler -v 2.1.4
   test:
     parallelism: 3
     docker:
