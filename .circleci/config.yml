@@ -8,6 +8,8 @@ jobs:
   build:
     docker:
       - image: cimg/ruby:2.6.5-node
+    environment:
+      BUNDLER_VERSION: 2.1.4
     steps:
       - checkout
       - ruby/install-deps
@@ -43,7 +45,6 @@ jobs:
       - run:
           name: Database setup
           command: bundle exec rails db:schema:load --trace
-                   gem install bundler -v 2.1.4
       # Run rspec in parallel
       - ruby/rspec-test
       - ruby/rubocop-check
